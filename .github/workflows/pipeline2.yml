@@ -45,5 +45,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          LOCAL_BASE: main
-        run: gh pr merge ${LOCAL_BASE} --auto
+          LOCAL_BASE: ${{ github.ref }}
+        run: gh pr merge "${LOCAL_BASE}" --auto
