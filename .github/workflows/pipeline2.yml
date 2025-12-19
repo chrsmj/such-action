@@ -16,13 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.head_ref }}
 
       - name: Make Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          LOCAL_HEAD: ${{ github.ref }}
+          LOCAL_HEAD: ${{ github.head_ref }}
           LOCAL_BASE: main
         run: |
           gh pr create \
@@ -39,11 +39,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.head_ref }}
 
       - name: Merge Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          LOCAL_BASE: ${{ github.ref }}
+          LOCAL_BASE: ${{ github.head_ref }}
         run: gh pr merge "${LOCAL_BASE}" --auto
