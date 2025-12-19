@@ -1,4 +1,4 @@
-name: "Staging PR Pipeline"
+name: "Staging PR Pipeline 3"
 on:
   push:
     branches:
@@ -16,13 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.ref }}
 
       - name: Make Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          LOCAL_HEAD: ${{ github.head_ref }}
+          LOCAL_HEAD: ${{ github.ref }}
           LOCAL_BASE: main
         run: |
           gh pr create \
@@ -30,20 +30,3 @@ jobs:
             --base="${LOCAL_BASE}" \
             --title="Pulling ${LOCAL_HEAD} into ${LOCAL_BASE}" \
             --body="An automated PR"
-
-  merge-pr:
-    name: Auto merge PR
-    needs: make-pr
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Merge Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          LOCAL_BASE: ${{ github.head_ref }}
-        run: gh pr merge "${LOCAL_BASE}" --auto

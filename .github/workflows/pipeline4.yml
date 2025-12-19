@@ -1,0 +1,25 @@
+name: "Staging PR Pipeline 4"
+on:
+  pull_request:
+    branches:
+      - 'staging'
+    paths:
+      - 'i18n/*'
+
+jobs:
+  merge-pr:
+    name: Auto merge PR
+    needs: make-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Merge Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LOCAL_BASE: ${{ github.head_ref }}
+        run: gh pr merge "${LOCAL_BASE}" --auto --merge
