@@ -29,8 +29,7 @@ jobs:
             --head="${LOCAL_HEAD}" \
             --base="${LOCAL_BASE}" \
             --title="Pulling ${LOCAL_HEAD} into ${LOCAL_BASE}" \
-            --body="An automated PR" \
-            --label="auto"
+            --body="An automated PR"
 
   merge-pr:
     name: Auto merge PR
