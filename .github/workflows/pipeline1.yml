@@ -14,8 +14,10 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
+        env:
+          LOCAL_HEAD: ${{ github.ref }}
         uses: actions/checkout@v6
-          ref: ${{ github.ref }}
+          ref: ${LOCAL_HEAD}
 
       - name: Make Pull Request
         env:
@@ -37,8 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
+        env:
+          LOCAL_HEAD: ${{ github.ref }}
         uses: actions/checkout@v6
-          ref: ${{ github.ref }}
+          ref: ${LOCAL_HEAD}
 
       - name: Merge Pull Request
         env:
