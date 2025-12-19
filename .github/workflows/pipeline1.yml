@@ -1,0 +1,48 @@
+name: "Staging PR Pipeline"
+on:
+  push:
+    branches:
+      - 'staging'
+    paths:
+      - 'i18n/*'
+
+jobs:
+  make-pr:
+    name: Auto make PR
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+          ref: ${{ github.ref }}
+
+      - name: Make Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LOCAL_HEAD: ${{ github.ref }}
+          LOCAL_BASE: main
+        run: |
+          gh pr create \
+            --head="${LOCAL_HEAD}" \
+            --base="${LOCAL_BASE}" \
+            --title="Pulling ${LOCAL_HEAD} into ${LOCAL_BASE}" \
+            --body="An automated PR" \
+            --label="auto"
+
+  merge-pr:
+    name: Auto merge PR
+    needs: make-pr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+          ref: ${{ github.ref }}
+
+      - name: Merge Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LOCAL_BASE: main
+        run: gh pr merge ${LOCAL_BASE} --auto
