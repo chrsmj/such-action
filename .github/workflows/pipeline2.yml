@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
           ref: ${{ github.ref }}
 
       - name: Make Pull Request
@@ -38,6 +39,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
           ref: ${{ github.ref }}
 
       - name: Merge Pull Request
