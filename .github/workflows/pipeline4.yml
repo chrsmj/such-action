@@ -3,13 +3,10 @@ on:
   pull_request:
     branches:
       - 'staging'
-    paths:
-      - 'i18n/*'
 
 jobs:
   merge-pr:
     name: Auto merge PR
-    needs: make-pr
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
