@@ -6,7 +6,7 @@ jobs:
     name: Auto merge PR
     runs-on: ubuntu-latest
     steps:
-      - name: echo
+      - name: echo test
         run: echo ${{ github.head_ref }}
 
       - name: Checkout
