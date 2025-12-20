@@ -1,4 +1,5 @@
 name: "Staging PR Pipeline B"
+
 on:
   workflow_run:
     workflows:
@@ -8,61 +9,46 @@ on:
     types:
       - completed
 
+env:
+  RELEASE_BRANCH: main
+  LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
+
 jobs:
   merge-pr:
     name: Auto merge PR
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Checkout branch
+      - name: Checkout local base branch
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.workflow_run.head_branch }}
+          ref: $LOCAL_BASE
           fetch-depth: 0
 
       - name: Merge Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
         run: gh pr merge "${LOCAL_BASE}" --auto --merge
 
-      - name: more testing 
-        run: git status
+      - name: Checkout release branch
+        run: git checkout "${RELEASE_BRANCH}"
 
-      - name: even more testing 
-        run: git show-ref
-
-      - name: testing 0
-        run: ls -last i18n
-
-      - name: Checkout main
-        run: git checkout main
-
-      - name: testing 1
-        run: ls -last i18n
-
-      - name: Sync main post PR merge
+      - name: Sync release branch post PR merge
         run: git pull
 
-      - name: testing 2
-        run: ls -last i18n
-
-      - name: Checkout branch
-        env:
-          LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
+      - name: Checkout local base branch
         run: git checkout "${LOCAL_BASE}"
 
-      - name: Sync branch
+      - name: Sync local base branch
         run: git pull
 
-      - name: Merge main into branch
+      - name: Merge release branch into local base branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
-          LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
-        run: git merge main
+        run: git merge "${RELEASE_BRANCH}"
 
-      - name: Push branch
+      - name: Push local base branch
         run: git push
 
