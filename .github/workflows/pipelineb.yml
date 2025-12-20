@@ -1,0 +1,27 @@
+name: "Staging PR Pipeline B"
+on:
+  workflow_run:
+    workflows:
+      - 'Staging PR Pipeline A'
+    branches:
+      - staging
+    types:
+      - completed
+
+jobs:
+  merge-pr:
+    name: Auto merge PR
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+
+      - name: Merge Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
+        run: gh pr merge "${LOCAL_BASE}" --auto --merge
