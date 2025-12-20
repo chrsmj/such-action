@@ -19,10 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Checkout local base branch
+      - name: Checkout action
         uses: actions/checkout@v6
         with:
-          ref: $LOCAL_BASE
           fetch-depth: 0
 
       - name: Merge Pull Request
