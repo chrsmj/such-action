@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Checkout
+      - name: Checkout branch
         uses: actions/checkout@v6
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
@@ -26,16 +26,27 @@ jobs:
           LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
         run: gh pr merge "${LOCAL_BASE}" --auto --merge
 
-      - name: Checkout again
-        uses: actions/checkout@v6
+      - name: Checkout main
+        run: git checkout main
 
-      - name: Merge Branch
+      - name: Sync main post PR merge
+        run: git pull
+
+      - name: Checkout branch
+        env:
+          LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
+        run: git checkout "${LOCAL_BASE}"
+
+      - name: Sync branch
+        run: git pull
+
+      - name: Merge main into branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
-        run: |
-          git checkout "${LOCAL_BASE}" \
-          git merge main \
-          git push
+        run: git merge main
+
+      - name: Push branch
+        run: git push
 
