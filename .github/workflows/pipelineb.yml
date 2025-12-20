@@ -22,7 +22,7 @@ jobs:
       - name: Checkout local base branch
         uses: actions/checkout@v6
         with:
-          ref: "${LOCAL_BASE}"
+          ref: $LOCAL_BASE
           fetch-depth: 0
 
       - name: Merge Pull Request
