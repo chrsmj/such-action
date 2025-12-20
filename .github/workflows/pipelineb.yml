@@ -25,3 +25,16 @@ jobs:
           GH_REPO: ${{ github.repository }}
           LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
         run: gh pr merge "${LOCAL_BASE}" --auto --merge
+
+      - name: Merge Branch
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          git checkout main \
+          git pull \
+          git checkout "${LOCAL_BASE}" \
+          git merge main \
+          git push
+
