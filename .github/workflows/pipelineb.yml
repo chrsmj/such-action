@@ -28,8 +28,6 @@ jobs:
 
       - name: Checkout again
         uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.workflow_run.head_branch }}
 
       - name: Merge Branch
         env:
@@ -37,6 +35,7 @@ jobs:
           GH_REPO: ${{ github.repository }}
           LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
         run: |
+          git checkout "${LOCAL_BASE}" \
           git merge main \
           git push
 
