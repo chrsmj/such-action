@@ -32,6 +32,9 @@ jobs:
       - name: even more testing 
         run: git show-ref
 
+      - name: testing 0
+        run: ls -last i18n
+
       - name: Checkout main
         uses: actions/checkout@v6
         with:
