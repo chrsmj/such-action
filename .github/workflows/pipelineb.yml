@@ -26,6 +26,9 @@ jobs:
           LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
         run: gh pr merge "${LOCAL_BASE}" --auto --merge
 
+      - name: testing 
+        run: ls -last
+
       - name: Checkout main
         run: git checkout main
 
