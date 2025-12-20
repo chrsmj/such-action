@@ -1,14 +1,14 @@
 name: "Staging PR Pipeline 5"
-on:
-  pull_request:
-    branches:
-      - 'staging'
+on: pull_request
 
 jobs:
   merge-pr:
     name: Auto merge PR
     runs-on: ubuntu-latest
     steps:
+      - name: echo
+        run: echo ${{ github.head_ref }}
+
       - name: Checkout
         uses: actions/checkout@v6
         with:
