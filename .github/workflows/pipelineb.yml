@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
+          fetch-depth: 0
 
       - name: Merge Pull Request
         env:
@@ -36,9 +37,7 @@ jobs:
         run: ls -last i18n
 
       - name: Checkout main
-        uses: actions/checkout@v6
-        with:
-          ref: main
+        run: git checkout main
 
       - name: testing 1
         run: ls -last i18n
