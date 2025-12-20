@@ -1,4 +1,4 @@
-name: "Staging PR Pipeline 3"
+name: "Staging PR Pipeline A"
 on:
   push:
     branches:
