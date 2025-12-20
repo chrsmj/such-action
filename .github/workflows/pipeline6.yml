@@ -1,4 +1,4 @@
-name: "Staging PR Pipeline 5"
+name: "Staging PR Pipeline 6"
 on: pull_request
 
 jobs:
