@@ -29,6 +29,12 @@ jobs:
       - name: testing 
         run: ls -last
 
+      - name: more testing 
+        run: git status
+
+      - name: even more testing 
+        run: git show-ref
+
       - name: Checkout main
         run: git checkout main
 
