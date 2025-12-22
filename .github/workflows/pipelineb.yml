@@ -1,9 +1,9 @@
-name: "Staging PR Pipeline B"
+name: "PR Pipeline B"
 
 on:
   workflow_run:
     workflows:
-      - 'Staging PR Pipeline A'
+      - 'PR Pipeline A'
     branches:
       - 'stage/*'
     types:
