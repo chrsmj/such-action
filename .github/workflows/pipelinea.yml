@@ -1,32 +1,14 @@
-name: "Staging PR Pipeline A"
+name: "Stage PR Pipeline A"
+
 on:
   push:
     branches:
-      - 'staging'
+      - 'stage/*'
     paths:
       - 'i18n/*'
 
 jobs:
-  make-pr:
-    name: Auto make PR
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
+  first:
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.ref }}
+      - uses: ./.github/actions/actiona.yml
 
-      - name: Make Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          LOCAL_HEAD: ${{ github.ref }}
-          LOCAL_BASE: main
-        run: |
-          gh pr create \
-            --head="${LOCAL_HEAD}" \
-            --base="${LOCAL_BASE}" \
-            --title="Pulling ${LOCAL_HEAD} into ${LOCAL_BASE}" \
-            --body="An automated PR"
