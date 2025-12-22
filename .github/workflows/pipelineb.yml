@@ -13,4 +13,4 @@ jobs:
   first:
     runs-on: ubuntu-latest
     steps:
-      - uses: chrismj/such-action/ActionB@main
+      - uses: chrismj/such-action/.github/workflows/actionb.yml@main
