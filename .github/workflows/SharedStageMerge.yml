@@ -1,5 +1,5 @@
-name: ActionB
-run-name: "ActionB ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
+name: SharedStageMerge
+run-name: "SharedStageMerge ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
 on:
   workflow_call:
 

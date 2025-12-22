@@ -1,0 +1,12 @@
+name: "Stage Push"
+
+on:
+  push:
+    branches:
+      - 'stage/*'
+    paths:
+      - 'i18n/*'
+
+jobs:
+  first:
+    uses: chrsmj/such-action/.github/workflows/SharedStagePush.yml@main

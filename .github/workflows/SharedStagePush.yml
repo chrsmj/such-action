@@ -1,5 +1,5 @@
-name: ActionA
-run-name: "ActionA ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
+name: SharedStagePush
+run-name: "SharedStagePush ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
 on:
   workflow_call:
 
@@ -40,4 +40,4 @@ jobs:
             --head="${LOCAL_HEAD}" \
             --base="${LOCAL_BASE}" \
             --title="Pulling ${LOCAL_HEAD} into ${LOCAL_BASE}" \
-            --body="An automated PR"
+            --body="An automated PR from a push to a staging branch"

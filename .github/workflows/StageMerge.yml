@@ -1,9 +1,9 @@
-name: "PR Pipeline B"
+name: "Stage Merge"
 
 on:
   workflow_run:
     workflows:
-      - 'PR Pipeline A'
+      - 'Stage Push'
     branches:
       - 'stage/*'
     types:
@@ -11,4 +11,4 @@ on:
 
 jobs:
   first:
-    uses: chrsmj/such-action/.github/workflows/actionb.yml@main
+    uses: chrsmj/such-action/.github/workflows/SharedStageMerge.yml@main
