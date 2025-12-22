@@ -9,6 +9,7 @@ on:
 
 jobs:
   first:
+    runs-on: ubuntu-latest
     steps:
       - uses: ./.github/actions/actiona.yml
 
