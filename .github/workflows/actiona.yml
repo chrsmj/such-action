@@ -14,9 +14,9 @@ permissions:
 
 env:
   LOCAL_HEAD: ${{ github.ref }}
-  LOCAL_BASE: ${{ endsWith(github.ref,'1') && 'release/1' || \
-                  endsWith(github.ref,'2') && 'release/2' || \
-                  endsWith(github.ref,'3') && 'release/3' || \
+  LOCAL_BASE: ${{ endsWith(github.ref,'1') && 'release/1' ||
+                  endsWith(github.ref,'2') && 'release/2' ||
+                  endsWith(github.ref,'3') && 'release/3' ||
                   'release/0' }}
     
 jobs:

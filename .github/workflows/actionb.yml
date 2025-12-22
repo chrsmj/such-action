@@ -14,9 +14,9 @@ permissions:
 
 env:
   LOCAL_BASE: ${{ github.event.workflow_run.head_branch }}
-  RELEASE_BRANCH: ${{ endsWith(github.event.workflow_run.head_branch,'1') && 'release/1' || \
-                      endsWith(github.event.workflow_run.head_branch,'2') && 'release/2' || \
-                      endsWith(github.event.workflow_run.head_branch,'3') && 'release/3' || \
+  RELEASE_BRANCH: ${{ endsWith(github.event.workflow_run.head_branch,'1') && 'release/1' ||
+                      endsWith(github.event.workflow_run.head_branch,'2') && 'release/2' ||
+                      endsWith(github.event.workflow_run.head_branch,'3') && 'release/3' ||
                       'release/0' }}
 
 jobs:
