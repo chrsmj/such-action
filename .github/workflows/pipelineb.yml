@@ -11,4 +11,4 @@ on:
 
 jobs:
   first:
-    uses: chrismj/such-action/.github/workflows/actionb.yml@main
+    uses: chrsmj/such-action/.github/workflows/actionb.yml@main
