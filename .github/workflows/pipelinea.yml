@@ -11,5 +11,4 @@ jobs:
   first:
     runs-on: ubuntu-latest
     steps:
-      - uses: chrsmj/such-action/.github/actions/actiona.yml@main
-
+      - uses: chrsmj/such-action/ActionA@main
