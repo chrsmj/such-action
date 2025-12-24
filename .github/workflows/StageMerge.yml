@@ -11,5 +11,5 @@ on:
       - 'completed'
 
 jobs:
-  wrapper:
+  wrap:
     uses: chrsmj/such-action/.github/workflows/SharedStageMerge.yml@main
