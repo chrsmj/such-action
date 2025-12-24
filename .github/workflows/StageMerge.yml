@@ -1,9 +1,9 @@
-name: "Stage Merge"
+name: StageMerge
 
 on:
   workflow_run:
     workflows:
-      - 'Stage Push'
+      - 'StagePush'
     branches:
       - 'stage/*'
     types:
