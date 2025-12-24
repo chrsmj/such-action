@@ -1,5 +1,5 @@
 name: ReleasePush
-run-name: "ReleasePush ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
+run-name: "ReleasePush ${{ github.run_id }}/${{ github.run_number }}/${{ github.run_attempt }} (${{ github.action }}) by @${{ github.actor }}"
 
 on:
   push:
@@ -7,5 +7,5 @@ on:
       - 'release/*'
 
 jobs:
-  wrapper:
+  wrap:
     uses: chrsmj/such-action/.github/workflows/SharedReleasePush.yml@main

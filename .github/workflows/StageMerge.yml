@@ -1,5 +1,5 @@
 name: StageMerge
-run-name: "StageMerge ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
+run-name: "StageMerge ${{ github.run_id }}/${{ github.run_number }}/${{ github.run_attempt }} (${{ github.action }}) by @${{ github.actor }}"
 
 on:
   workflow_run:
