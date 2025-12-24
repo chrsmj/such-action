@@ -1,5 +1,5 @@
 name: StagePush
-run-name: "StagePush ${{ github.run_id }}/${{ github.run_number }}/${{ github.run_attempt }} (${{ github.action }}) by @${{ github.actor }}"
+run-name: "StagePush ${{ github.run_number }}/${{ github.run_attempt }} (${{ github.event_name }}) by @${{ github.actor }}"
 
 on:
   push:
