@@ -1,5 +1,5 @@
 name: SharedStagePush
-run-name: "SharedStagePush ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
+
 on:
   workflow_call:
 
