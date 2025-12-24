@@ -9,5 +9,5 @@ on:
       - 'i18n/*'
 
 jobs:
-  wrapper:
+  wrap:
     uses: chrsmj/such-action/.github/workflows/SharedStagePush.yml@main
