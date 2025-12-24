@@ -1,0 +1,37 @@
+name: SharedReleasePush
+run-name: "SharedReleasePush ${{ github.event.number }} (${{ github.event.action }}) by ${{ github.actor }}"
+on:
+  workflow_call:
+
+permissions:
+  actions: read
+  checks: read
+  contents: write
+  issues: read
+  pull-requests: read
+  repository-projects: read
+  statuses: read
+
+env:
+  LOCAL_HEAD: ${{ github.ref }}
+  LOCAL_BASE: ${{ endsWith(github.ref,'1') && 'stage/1' ||
+                  endsWith(github.ref,'2') && 'stage/2' ||
+                  endsWith(github.ref,'3') && 'stage/3' ||
+                  'stage/0' }}
+    
+jobs:
+  Merge:
+    name: Auto merge
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: test 1
+        run: git status
+
+      - name: test 2
+        run: ls -last
+
