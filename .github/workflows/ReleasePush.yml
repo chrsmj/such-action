@@ -1,0 +1,10 @@
+name: ReleasePush
+
+on:
+  push:
+    branches:
+      - 'release/*'
+
+jobs:
+  first:
+    uses: chrsmj/such-action/.github/workflows/SharedReleasePush.yml@main
